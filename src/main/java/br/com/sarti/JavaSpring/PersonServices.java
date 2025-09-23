@@ -2,6 +2,7 @@ package br.com.sarti.JavaSpring;
 
 import br.com.sarti.JavaSpring.model.Person;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ public class PersonServices {
 
 
     public List<Person> findAll (){
+        logger.info("Finding all people!");
+
         List<Person> persons = new ArrayList<Person>();
         for (int i = 0; i < 8; i++) {
             Person person = mockPerson(i);
@@ -25,7 +28,6 @@ public class PersonServices {
 
         return persons;
     }
-
 
     public Person findById (String id){
         logger.info("Finding one Person!");
@@ -51,5 +53,12 @@ public class PersonServices {
 
 
     }
+
+    public Person create ( Person person) {
+        logger.info("Creating one person!");
+
+        return person;
+    }
+
 
 }
