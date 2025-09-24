@@ -1,7 +1,7 @@
 package br.com.sarti.JavaSpring.controllers;
 
+import br.com.sarti.JavaSpring.data.dto.PersonDTO;
 import br.com.sarti.JavaSpring.services.PersonServices;
-import br.com.sarti.JavaSpring.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class PersonController {
 
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public List<Person> findAll() {
+    public List<PersonDTO> findAll() {
         return service.findAll();
 
     }
@@ -27,7 +27,7 @@ public class PersonController {
     @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public Person findById(@PathVariable("id") Long id) {
+    public PersonDTO findById(@PathVariable("id") Long id) {
         return service.findById(id);
 
     }
@@ -37,7 +37,7 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
 
-    public Person create(@RequestBody Person person) {
+    public PersonDTO create(@RequestBody PersonDTO person) {
         return service.create(person);
 
     }
@@ -47,7 +47,7 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
 
-    public Person update(@RequestBody Person person) {
+    public PersonDTO update(@RequestBody PersonDTO person) {
         return service.update(person);
 
     }
