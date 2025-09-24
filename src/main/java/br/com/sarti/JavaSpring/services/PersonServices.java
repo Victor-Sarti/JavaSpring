@@ -3,13 +3,11 @@ package br.com.sarti.JavaSpring.services;
 import br.com.sarti.JavaSpring.exeception.ResouceNotFoundException;
 import br.com.sarti.JavaSpring.model.Person;
 import br.com.sarti.JavaSpring.repository.PersonRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import org.slf4j.Logger;
 import java.util.List;
-import java.util.logging.Logger;
-
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service //para poder chamar em outros arquivos
@@ -20,7 +18,7 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
 
     public List<Person> findAll (){
