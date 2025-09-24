@@ -1,1 +1,15 @@
-spring.application.name=JavaSpring
+spring:
+  application:
+    name:JavaSpring
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_boot_estud?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: Sarti007@
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
