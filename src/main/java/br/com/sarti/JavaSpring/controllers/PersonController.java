@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 
     @Autowired // Anula o fato de usar o service = new personservices();
@@ -43,7 +43,7 @@ public class PersonController {
 
     }
 
-    @PostMapping(value = "/v2",
+    @PostMapping(value = "/api/person/v2",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
