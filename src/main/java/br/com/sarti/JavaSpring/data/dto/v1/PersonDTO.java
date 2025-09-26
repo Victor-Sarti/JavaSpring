@@ -1,4 +1,4 @@
-package br.com.sarti.JavaSpring.data.dto;
+package br.com.sarti.JavaSpring.data.dto.v1;
 
 import jakarta.persistence.*;
 

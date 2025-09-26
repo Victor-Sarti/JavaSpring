@@ -3,7 +3,7 @@ package br.com.sarti.JavaSpring.unitests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.sarti.JavaSpring.data.dto.PersonDTO;
+import br.com.sarti.JavaSpring.data.dto.v1.PersonDTO;
 import br.com.sarti.JavaSpring.model.Person;
 
 public class MockPerson {
