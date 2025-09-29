@@ -1,6 +1,7 @@
 package br.com.sarti.JavaSpring.exeception.hadler;
 
 import br.com.sarti.JavaSpring.exeception.ExeceptionResponse;
+import br.com.sarti.JavaSpring.exeception.RequireObjectIsNullException;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,14 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             ex.getMessage(),
             request.getDescription(false));
     return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequireObjectIsNullException.class)
+    public final ResponseEntity<ExeceptionResponse> handleBadRequestExeceptions (Exception ex, WebRequest request){
+    ExeceptionResponse response = new ExeceptionResponse(
+            new Date(),
+            ex.getMessage(),
+            request.getDescription(false));
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

@@ -3,6 +3,7 @@ package br.com.sarti.JavaSpring.services;
 import br.com.sarti.JavaSpring.controllers.PersonController;
 import br.com.sarti.JavaSpring.data.dto.v1.PersonDTO;
 import br.com.sarti.JavaSpring.data.dto.v2.PersonDTOV2;
+import br.com.sarti.JavaSpring.exeception.RequireObjectIsNullException;
 import br.com.sarti.JavaSpring.exeception.ResouceNotFoundException;
 import static br.com.sarti.JavaSpring.mapper.ObjectMapper.parseListObjects;
 import static br.com.sarti.JavaSpring.mapper.ObjectMapper.parseObject;
@@ -53,7 +54,10 @@ public class PersonServices {
 
 
     public PersonDTO create (PersonDTO person) {
+
+       if(person == null) throw new RequireObjectIsNullException();
         logger.info("Creating one person!");
+
       var entity =  parseObject(person, Person.class);
         var dto = parseObject(repository.save(entity), PersonDTO.class);
         addHateoasLinks(dto);
@@ -68,7 +72,9 @@ public class PersonServices {
     }
 
      public PersonDTO update ( PersonDTO person) {
-        logger.info("Updating one person!");
+         if(person == null) throw new RequireObjectIsNullException();
+
+         logger.info("Updating one person!");
          Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResouceNotFoundException("No records found for this ID!"));
 
          entity.setFirstName(person.getFirstName());
