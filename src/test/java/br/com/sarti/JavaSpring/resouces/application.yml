@@ -1,8 +1,10 @@
-cors:
+server:
+  port: 8888
+  cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://github.com/Victor-Sarti
 spring:
   application:
-    name:JavaSpring
+    name: JavaSpring
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spring_boot_estud?useTimezone=true&serverTimezone=UTC
@@ -15,7 +17,12 @@ spring:
       hibernate:
     show-sql: false
     open-in-view: false
-  logging:
-    level:
-   # root: WARN
-    br.com.sarti: DEBUG
+logging:
+  level:
+    root: INFO
+    # root: WARN
+    # br.com.erudio: DEBUG
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
