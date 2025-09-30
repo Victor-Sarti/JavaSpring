@@ -11,6 +11,7 @@ import static br.com.sarti.JavaSpring.mapper.ObjectMapper.parseObject;
 import br.com.sarti.JavaSpring.mapper.custom.PersonMapper;
 import br.com.sarti.JavaSpring.model.Person;
 import br.com.sarti.JavaSpring.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -95,6 +96,19 @@ public class PersonServices {
         repository.delete(entity);
     }
 
+    @Transactional
+    public PersonDTO disablePerson(Long id){
+        logger.info("Disabling one person!");
+        repository.findById(id)
+                .orElseThrow(() -> new ResouceNotFoundException("No records found for this ID!"));
+
+        repository.disablePerson(id);
+        var entity = repository.findById(id).get();
+        var dto = parseObject(entity, PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
+    }
+
     private  void addHateoasLinks (PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
 
@@ -104,9 +118,13 @@ public class PersonServices {
 
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("UPDATE"));
 
+        dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("disable").withType("PATCH"));
+
 
         dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
 
 
     }
+
+
 }

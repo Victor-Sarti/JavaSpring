@@ -26,6 +26,8 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
 
     @Column(nullable = false, length = 6)
     private String gender;
+    @Column(nullable = false)
+    private boolean enabled;
 
     public PersonDTO() {
     }
@@ -38,15 +40,24 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
         this.gender = gender;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof PersonDTO person)) return false;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender());
+        if (!(o instanceof PersonDTO personDTO)) return false;
+        if (!super.equals(o)) return false;
+        return isEnabled() == personDTO.isEnabled() && Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(super.hashCode(), getId(), getFirstName(), getLastName(), getAddress(), getGender(), isEnabled());
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getAddress() {
