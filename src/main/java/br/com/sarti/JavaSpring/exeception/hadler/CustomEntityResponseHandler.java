@@ -1,6 +1,7 @@
 package br.com.sarti.JavaSpring.exeception.hadler;
 
 import br.com.sarti.JavaSpring.exeception.ExeceptionResponse;
+import br.com.sarti.JavaSpring.exeception.FileStorageException;
 import br.com.sarti.JavaSpring.exeception.RequireObjectIsNullException;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -42,5 +44,23 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
             ex.getMessage(),
             request.getDescription(false));
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    public final ResponseEntity<ExeceptionResponse> handleFileNotFoundException (Exception ex, WebRequest request){
+    ExeceptionResponse response = new ExeceptionResponse(
+            new Date(),
+            ex.getMessage(),
+            request.getDescription(false));
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FileStorageException.class)
+    public final ResponseEntity<ExeceptionResponse> handleFileStorageException (Exception ex, WebRequest request){
+    ExeceptionResponse response = new ExeceptionResponse(
+            new Date(),
+            ex.getMessage(),
+            request.getDescription(false));
+    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
