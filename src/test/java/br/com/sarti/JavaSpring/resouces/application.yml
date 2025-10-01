@@ -31,7 +31,7 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enabled: true
       mail.smtp.starttls.required: true
-    servelet:
+    servlet:
       multipart:
         enable: true
         file-size-threshold: 2KB

@@ -9,8 +9,7 @@ public class EmailRequestDTO {
     private String subject;
     private String body;
 
-    public EmailRequestDTO() {
-    }
+    public EmailRequestDTO() {}
 
     public String getTo() {
         return to;
@@ -38,7 +37,8 @@ public class EmailRequestDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof EmailRequestDTO that)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmailRequestDTO that = (EmailRequestDTO) o;
         return Objects.equals(getTo(), that.getTo()) && Objects.equals(getSubject(), that.getSubject()) && Objects.equals(getBody(), that.getBody());
     }
 

@@ -5,9 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Objects;
-
 @Configuration
-@ConfigurationProperties(prefix = "spring-email" )
+@ConfigurationProperties(prefix = "spring.mail")
 public class EmailConfig {
 
     private String host;
@@ -17,8 +16,7 @@ public class EmailConfig {
     private String from;
     private boolean ssl;
 
-    public EmailConfig() {
-    }
+    public EmailConfig() {}
 
     public String getHost() {
         return host;
@@ -70,7 +68,8 @@ public class EmailConfig {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof EmailConfig that)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmailConfig that = (EmailConfig) o;
         return getPort() == that.getPort() && isSsl() == that.isSsl() && Objects.equals(getHost(), that.getHost()) && Objects.equals(getUsername(), that.getUsername()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getFrom(), that.getFrom());
     }
 
@@ -78,5 +77,4 @@ public class EmailConfig {
     public int hashCode() {
         return Objects.hash(getHost(), getPort(), getUsername(), getPassword(), getFrom(), isSsl());
     }
-
 }

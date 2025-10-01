@@ -54,7 +54,7 @@ public class EmailSender implements Serializable {
         return this;
     }
 
-    public void send(EmailConfig config) {
+    public void send(EmailConfig config){
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -96,4 +96,6 @@ public class EmailSender implements Serializable {
         }
         return recipientsList;
     }
+
+
 }
