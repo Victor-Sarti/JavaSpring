@@ -4,6 +4,9 @@ server:
   originPatterns: http://localhost:8080,http://localhost:3000,https://github.com/Victor-Sarti
 file:
   upload-dir: /uploadDir
+email:
+    subject: "Default Subject"
+    message: "Default Message"
 spring:
   application:
     name: JavaSpring
@@ -19,6 +22,15 @@ spring:
       hibernate:
     show-sql: false
     open-in-view: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enabled: true
+      mail.smtp.starttls.required: true
     servelet:
       multipart:
         enable: true
