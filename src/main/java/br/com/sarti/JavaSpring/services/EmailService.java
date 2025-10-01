@@ -1,6 +1,7 @@
 package br.com.sarti.JavaSpring.services;
 
 import br.com.sarti.JavaSpring.config.EmailConfig;
+import br.com.sarti.JavaSpring.data.dto.request.EmailRequestDTO;
 import br.com.sarti.JavaSpring.mail.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,11 @@ public class EmailService {
     @Autowired
     private EmailConfig emailConfigs;
 
-    public void sendSimpleEmail( String to, String subject, String body) {
+    public void sendSimpleEmail(EmailRequestDTO emailRequest) {
         emailSender
-                .to(to)
-                .withSubject(subject)
-                .withMessage(body)
+                .to(emailRequest.getTo())
+                .withSubject(emailRequest.getSubject())
+                .withMessage(emailRequest.getBody())
                 .send(emailConfigs);
 
     }
