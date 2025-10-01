@@ -25,6 +25,7 @@ public class EmailController implements EmailControllerDocs {
         return new ResponseEntity<>("e-Mail sent with success!", HttpStatus.OK);
     }
 
+    // manda email com anexos
     @PostMapping(value = "/withAttachment", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Override
     public ResponseEntity<String> sendEmailWithAttachment(
